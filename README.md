@@ -1,5 +1,5 @@
 # Event Registration
-It is the simplest Django project for learning **Form Handling** by building a event registration application.
+It is the simplest Django project for learning **Form Handling** by building a event registration application. Here inmemory very simple database system is developed to store data.
 
 ## What is used in this project?
 **Python3:** It's high time we should use Python3 instead of Python2.<br>
