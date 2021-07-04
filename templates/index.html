@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        @import url('https://fonts.maateen.me/siyam-rupali/font.css');
+
+        body, button, input, select, textarea {
+            font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, SiyamRupali, sans-serif;
+        }
+
+        .py-center {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .feature {
+            min-height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero is-info">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <div class="columns">
+                        <div class="column is-one-fifth">
+                            <img src="https://www.pust.ac.bd/includes/images/forms/PUST_Logo.svg"
+                                 style="height: 80px"
+                                 alt="">
+
+                        </div>
+                        <div class="column">
+                            <h1 class="title">
+                                আইসিই ফিয়েস্তা ২০২১
+                            </h1>
+                            <h2 class="subtitle">
+                                <span> আইসিই বিভাগ, পাবিপ্রবি -এর মনোমুগ্ধ আয়োজন</span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="column" style="text-align: center">
+                    <a class="button is-success is-large" href="#registration">রেজিস্ট্রেশন করুন</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-white">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half py-center feature">
+                    <i style="font-size: 500%" class="fas has-text-success fa-map-marker-alt"></i>
+                </div>
+                <div class="column py-center">
+                     <div class="has-text-right">
+                         <h1 class="title">খেলাধুলা !!!</h1>
+                         <p> দুই দিন ব্যাপি বিভিন্ন ধরনের ইনডোর, আউটডোর খেলাধুলার আয়োজ। যেমন কার্ড, দাবা, লুডু, ক্যারাম, ফুটবল, বিতর্ক, প্রোগ্রামিং কন্টেস্ট, আইটি কুইজ, ক্রিকেট ইত্যাদি...
+                             শিক্ষক ও ছাত্রছাত্রী মিলেমিশে এই সকল খেলাধুলায় অংশগ্রহন করে থাকে।</p>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-light">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column py-center">
+                     <div class="has-text-right">
+                         <h1 class="title"> পুরস্কার বিতরণী ও সাংস্কৃতিক পরিবেশনা...</h1>
+                         <p> বছর জুরে বিভিন্ন প্রতিযোগীতায় সাফল্য অর্জনকারীদের পুরুস্কার বিতরণ এবং ছাত্র-ছাত্রী ও শিক্ষকগনের স্বতঃস্ফুর্ত অংশগ্রহনে জাকজমক পূর্ণ সাংস্কৃতিক সন্ধ্যার আয়োজন হয়ে থাকে।
+                             যেখানে নাচ, গান, নাটক, কৌতুক সহ বিভিন্ন পরিবেশনা হয়।  </p>
+                     </div>
+                </div>
+                <div class="column is-half py-center feature">
+                    <i style="font-size: 500%" class="fas has-text-success fa-microphone"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a name="registration"></a>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column py-center" style="min-height: 220px;">
+                <i style="font-size: 500%" class="fas has-text-success fa-comment-alt"></i>
+                <i style="font-size: 500%" class="fas has-text-info fa-map-marker-alt"></i>
+                <i style="font-size: 500%" class="fas has-text-primary fa-microphone"></i>
+            </div>
+            <div class="column">
+                {% if ticket %}
+                <div class="notification is-success">
+                   অভিনন্দন! রেজিস্টেশন সফল হয়েছে...
+                </div>
+                {% include "card.html" %}
+                {% else %}
+                {% if form.errors %}
+                <div class="notification is-danger">
+                    সঠিক ভাবে ফরমটি পুরন করুন...
+                </div>
+                {% endif %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="field">
+                         <label class="label">{{ form.name.label_tag }} </label>
+                        <div class="control">
+                            {{ form.name }}
+                        </div>
+                        {% for error in form.name.errors %}
+                        <p class="help is-danger">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">{{ form.email.label_tag }} </label>
+                        <div class="control has-icons-left has-icons-right">
+                            {{ form.email }}
+                            <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        {% for error in form.email.errors %}
+                        <p class="help is-danger">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="field">
+                         <label class="label">{{ form.phone.label_tag }} </label>
+                        <div class="control has-icons-left has-icons-right">
+                            {{ form.phone }}
+                            <span class="icon is-small is-left"><i class="fas fa-phone"></i></span>
+                        </div>
+                        {% for error in form.phone.errors %}
+                        <p class="help is-danger">{{ error|escape }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                {{ form.agree }}
+                                 আমি সকল নিয়ম কানুন ও শর্তাবলী মেনে নিচ্ছি।
+                            </label>
+                        </div>
+                         {% if errors.check %} <p class="help is-danger"> {{errors.check}} </p> {% endif %}
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link"> ঠিক আছে</button>
+                        </div>
+                        <div class="control">
+                            <input type="button" class="button is-danger" value="বাতিল" />
+                        </div>
+                    </div>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            টেক মাস্টার্সের <a href="https://techmasterslive.com/course/django-webapp">জ্যাঙ্গো ওয়েব অ্যাপ্লিকেশন
+            ডেভেলপমেন্ট</a> কোর্সের <b>ফরম হ্যান্ডেল</b> শেখার অংশ হিসেবে তৈরি
+        </p>
+    </div>
+</footer>
+</body>
+</html>
